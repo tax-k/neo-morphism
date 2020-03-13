@@ -1,0 +1,74 @@
+:root {
+    --neu-color: #e8eff5;
+    --neu-border-radius: 50px;
+}
+
+body {
+    background: var(--neu-color);
+}
+.main__head {
+    text-align: center;
+    font-family: sans-serif;
+}
+.main-container {
+    display: flex;
+}
+.main-container__preview {
+    width: 100%;
+    display: flex;
+}
+.main-container__config {
+    
+}
+.main-container__box-container {
+ display:  flex;   
+}
+.box-container__neu-box {
+    width: 250px;
+    height: 250px;
+    border-radius: var(--neu-border-radius);
+    background: var(--neu-color);
+    box-shadow:  20px 20px 60px #c5cbd0, 
+    -20px -20px 60px #ffffff;
+}
+
+.main-container__btn-container {
+    display: flex;
+    flex: 1 1;
+    justify-content: center;
+}
+.btn-container__neu-btn {
+    background:var(--neu-color);
+    width: 100px;
+    height: 100px;
+    margin: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 400ms;
+    box-shadow: 7px 7px 15px #c5cbd0, /*조명 왼쪽 기준 재질사이 거리 표현가능 px 크기로 작을수록 재질과 가깝*/
+    -4px -4px 13px #fff, 
+    inset 4px 4px 8px rgba(209, 217, 230, 0.2),
+    inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.btn-container__neu-btn > i {
+    font-size: 2.5em;
+    color: #727272;
+    transition: all 400ms;
+}
+
+.btn-container__neu-btn:hover i {
+    transform: scale(0.95);
+}
+
+.btn-container__neu-btn:hover {
+    box-shadow: 4px 2px 18px #c5cbd0,
+    -4px -4px 13px #fff, 
+    inset 6px 6px 16px rgba(209, 217, 230, 0.8),
+    inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+    transform: translateY(2px);
+}
