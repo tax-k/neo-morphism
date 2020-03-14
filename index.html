@@ -16,7 +16,7 @@
     <div class="main-container">
         <div class="main-container__preview">
             <div class="main-container__box-container">
-                <div class="box-container__neu-box">
+                <div class="box-container__neu-box" id="neu-box">
                     
                 </div>
             </div>
@@ -30,9 +30,23 @@
             </div>
         </div>
        <div class="main-container__config">
-           
+           <div class="row">
+                <label>Radius: </label><input type="range" min="1" max="100" value="50" class="slider" id="radiusRange" onchange="getCurrentValue(this.value)" oninput="getCurrentValue(this.value)">
+                <p id="result"></p> 
+            </div>  
        </div>
     </div>
+    <script type="text/javascript">
+        var neuBox = document.getElementById('neu-box');
+        var radiusRange = document.getElementById('radiusRange');
+
+        radiusRange.max = neuBox.clientWidth/2;
+        
+        getCurrentValue = (radius) =>{
+            neuBox.style.borderRadius = radius + 'px';
+        }
+
+    </script>
 </body>
 </html>
 
