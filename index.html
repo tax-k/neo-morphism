@@ -31,21 +31,86 @@
         </div>
        <div class="main-container__config">
            <div class="row">
-                <label>Radius: </label><input type="range" min="1" max="100" value="50" class="slider" id="radiusRange" onchange="getCurrentValue(this.value)" oninput="getCurrentValue(this.value)">
-                <p id="result"></p> 
-            </div>  
+                <label>Radius: </label>
+                <input type="range" min="1" max="100" value="50" class="slider" id="radiusRange" onchange="changeRadiusValue(this.value)" oninput="changeRadiusValue(this.value)">
+            </div>
+            <div class="row">
+                <label for="">Depth: </label>
+                <input type="range" min="5" max="50" value="20"  class="slider" id="depthRange" onchange="changeDepthValue(this.value)" oninput="changeDepthValue(this.value)">
+                <p id="depthValue"></p>  
+            </div>
+            <div class="row">
+                <label for="">Blur: </label>
+                <input type="range" min="0" max="100" value="40" step="2" class="slider" id="blurRange" onchange="changeBlurValue(this.value)" oninput="changeBlurValue(this.value)">
+                <p id="blurValue"></p>
+            </div>
+            <div class="row">
+                <label for="">Density: </label>
+                <input type="range" min="0.01" max="0.6" value="0.15" step="0.01" class="slider" id="densityRange" onchange="changeDensityValue(this.value)" oninput="changeDensityValue(this.value)">
+                <p id="densityValue"></p>
+            </div>
        </div>
     </div>
     <script type="text/javascript">
-        var neuBox = document.getElementById('neu-box');
-        var radiusRange = document.getElementById('radiusRange');
+        let neuBox = document.getElementById('neu-box');
+        let radiusRange = document.getElementById('radiusRange');
+        let depthRange = document.getElementById('depthRange');
+        let blurRange = document.getElementById('blurRange');
+        let densityRange = document.getElementById('densityRange');
+
+
+        let root = document.documentElement;
 
         radiusRange.max = neuBox.clientWidth/2;
         
-        getCurrentValue = (radius) =>{
+        changeRadiusValue = (radius) =>{
             neuBox.style.borderRadius = radius + 'px';
         }
 
+        changeDepthValue = (depth) => {
+            neuBox.style.boxShadow = depth + 'px ' + depth + 'px '+ (depth*2) +'px #c5cbd0, -' + depth + 'px -'+ depth + 'px '+ (depth*2)+'px #ffffff';
+            blurRange.value = depth*2;
+
+            document.getElementById('depthValue').innerHTML = depth + 'px';
+            document.getElementById('blurValue').innerHTML = blurRange.value + 'px';
+        }
+
+        changeBlurValue = (blur) => {
+            document.getElementById('blurValue').innerHTML = blurRange.value + 'px';
+            neuBox.style.boxShadow = blur/2 + 'px ' + blur/2 + 'px '+ blur +'px #c5cbd0, -' + blur/2 + 'px -'+ blur/2 + 'px '+ blur+'px #ffffff';
+        }
+
+        changeDensityValue = (density) => {
+            let style = getComputedStyle(root);
+            let densityColor = style.getPropertyValue('--neu-darkcolor');
+        
+            var convertColor = 
+            console.log(convertColor);
+            root.style.setProperty('--neu-color', convertColor);
+        }
+
+        function hexToRGBA(hex, opacity) {
+            return 'rgba(' + (hex = hex.replace('#', '')).match(new RegExp('(.{' + hex.length/3 + '})', 'g')).map(function(l) { return parseInt(hex.length%2 ? l+l : l, 16) }).concat(opacity||1).join(',') + ')';
+        }
+
+        hexToRgb = ( hexType , alpha)  => { 
+            var hex = hexType.replace( "#", "" ); 
+            var value = hex.match( /[a-f\d]/gi );
+            console.log(hexType);
+            console.log(hex);
+            console.log(value);
+
+            if ( value.length == 3 ) hex = value[0] + value[0] + value[1] + value[1] + value[2] + value[2]; 
+            value = hex.match( /[a-f\d]{2}/gi ); 
+
+            var r = parseInt( value[0], 16 ); 
+            var g = parseInt( value[1], 16 ); 
+            var b = parseInt( value[2], 16 ); 
+
+            var rgbType = "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")"; 
+
+            return rgbType; 
+        } 
     </script>
 </body>
 </html>
